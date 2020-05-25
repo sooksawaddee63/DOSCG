@@ -1,0 +1,51 @@
+!DOCTYPE html>
+<html>
+  <head>
+   <title>Distance Calculation</title>
+  </head>
+
+  <body onload = "loadMap()">
+    <h2>Distance Calculation</h2>
+    <div id = "map" style = "width:640px; height:480px;"></div>
+      <script>
+
+        // fake JSON call
+        function getJSONMarkers() {
+          const markers = [
+		{
+			"name": "Central World, Rama I Road, Pathum Wan, Pathum Wan District, Bangkok",
+			"position": [13.746870, 100.539292],
+	  
+		},
+		{
+			"name": "SCG สำนักงานใหญ่ บางซื่อ Siam Cement Alley, Bang Sue, Bangkok",
+			"location": [13.810711, 100.537016]
+		},
+          ];
+          return markers;
+        }
+
+        function loadMap() {
+          // Initialize Google Maps
+          const mapOptions = {
+            center:new google.maps.LatLng(13.7787905, 100.538154),
+            zoom: 11
+          }
+          const map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
+          // Load JSON Data
+          const hotelMarkers = getJSONMarkers();
+
+          // Initialize Google Markers
+          for(hotel of hotelMarkers) {
+            let marker = new google.maps.Marker({
+              map: map,
+              position: new google.maps.LatLng(hotel.location[0], hotel.location[1]),
+              title: hotel.name
+            })
+          }
+        }
+      </script>
+      <script src = "https://maps.googleapis.com/maps/api/js"></script>
+  </body>
+</html>
